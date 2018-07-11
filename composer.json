@@ -1,0 +1,24 @@
+{
+    "name": "mapado/image-url-builder",
+    "description": "Generate a full url from an image slug",
+    "type": "library",
+    "autoload": {
+        "psr-4": { "Mapado\\ImageUrlBuilder\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Mapado\\ImageUrlBuilder\\Tests\\": "Tests/" }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Julien Deniau",
+            "email": "julien.deniau@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.0"
+    },
+    "require-dev": {
+        "atoum/atoum": "^3.3"
+    }
+}

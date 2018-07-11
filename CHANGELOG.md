@@ -1,0 +1,15 @@
+# Changelog
+
+## 1.0.0
+
+### Changed
+
+* Make project public
+* Drop support for PHP < 7.0
+* imageCrop require a string a parameter (null was authorized before)
+* `Mapado\ImageBundle\Manager\CropManager` has been renamed to `Mapado\ImageUrlBuilder\Builder`
+* `Mapado\ImageBundle\Manager\CropManager::imageCrop` has been renamed to `Mapado\ImageUrlBuilder\Builder::buildUrl`
+* `Mapado\ImageBundle\Manager\CropManager::httpPrefixedCrop` has been changed to this:
+  ```php
+  $builder->withHttp()->buildUrl($slug);
+  ```
