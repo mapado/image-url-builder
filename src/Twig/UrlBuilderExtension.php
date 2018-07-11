@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mapado\ImageUrlBuilder\Twig;
 
 use Mapado\ImageUrlBuilder\Builder;
@@ -32,7 +34,7 @@ class UrlBuilderExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('imageUrl', [$this, 'imageUrl'])
+            new \Twig_SimpleFilter('imageUrl', [$this, 'imageUrl']),
         ];
     }
 

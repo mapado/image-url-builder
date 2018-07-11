@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mapado\ImageUrlBuilder;
 
 class Builder
@@ -10,7 +12,7 @@ class Builder
     private $prefix;
 
     /**
-     * @var string $prefix prefix of url, prefer using `withHttpPrefix`
+     * @var string prefix of url, prefer using `withHttpPrefix`
      */
     public function __construct(string $prefix = null)
     {
@@ -60,9 +62,8 @@ class Builder
 
             $image .= '_thumbs/' . (int) $width;
             if ($height > 0) {
-                $image .=  '-' . (int) $height;
+                $image .= '-' . (int) $height;
             }
-
 
             if (!empty($options['cropWidth']) || !empty($options['cropHeight'])) {
                 $cropWidth = !empty($options['cropWidth']) ? $options['cropWidth'] : 0;
@@ -81,7 +82,6 @@ class Builder
                 }
                 $image .= '.' . implode(';', $optionValues);
             }
-
 
             if ($extension) {
                 $image .= '.' . $extension;
