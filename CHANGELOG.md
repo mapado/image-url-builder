@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.1
+
+### Changed
+
+* Fix issue with Twig extension
+* add php-cs-fixer and phpstan
+
 ## 1.2.0
 
 ### Added

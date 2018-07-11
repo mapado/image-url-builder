@@ -1,6 +1,8 @@
 <?php
 
-namespace Mapado\ImageUrlBuilder\Tests\Unit;
+declare(strict_types=1);
+
+namespace Mapado\ImageUrlBuilder\Tests\Units;
 
 use atoum;
 use Mapado\ImageUrlBuilder\Builder as BaseBuilder;
@@ -16,9 +18,6 @@ class Builder extends atoum
 
     /**
      * testNonChangingUrl
-     *
-     * @access public
-     * @return void
      */
     public function testNonChangingUrl()
     {
@@ -40,9 +39,6 @@ class Builder extends atoum
 
     /**
      * testThumbs
-     *
-     * @access public
-     * @return void
      */
     public function testThumbs()
     {
@@ -105,9 +101,6 @@ class Builder extends atoum
 
     /**
      * testNoDomain
-     *
-     * @access public
-     * @return void
      */
     public function testNoDomain()
     {

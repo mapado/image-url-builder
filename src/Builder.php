@@ -7,7 +7,7 @@ namespace Mapado\ImageUrlBuilder;
 class Builder
 {
     /**
-     * @var string
+     * @var ?string
      */
     private $prefix;
 
@@ -32,7 +32,7 @@ class Builder
     /**
      * generate an image url from its slug
      *
-     * @param string $image the image slug (ie. `/2018/01/foo.jpg`)
+     * @param string $imageSlug the image slug (ie. `/2018/01/foo.jpg`)
      * @param int $width the output width
      * @param int $height the output height
      * @param array $options accept cropWidth, cropHeight or url options parameters (like `rcr`, etc.)
@@ -60,9 +60,9 @@ class Builder
                 $extension = null;
             }
 
-            $image .= '_thumbs/' . (int) $width;
+            $image .= '_thumbs/' . $width;
             if ($height > 0) {
-                $image .= '-' . (int) $height;
+                $image .= '-' . $height;
             }
 
             if (!empty($options['cropWidth']) || !empty($options['cropHeight'])) {

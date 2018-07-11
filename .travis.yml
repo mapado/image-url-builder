@@ -12,4 +12,5 @@ install:
     - composer install
 
 script:
+    - vendor/bin/phpstan analyse
     - vendor/bin/atoum

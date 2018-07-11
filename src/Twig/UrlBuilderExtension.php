@@ -39,7 +39,7 @@ class UrlBuilderExtension extends \Twig_Extension
     }
 
     /**
-     * imageCrop
+     * buildUrl
      */
     public function imageUrl(
         string $image,
@@ -47,7 +47,7 @@ class UrlBuilderExtension extends \Twig_Extension
         int $height = 0,
         array $options = []
     ): string {
-        return $this->builder->imageCrop($image, $width, $height, $options);
+        return $this->builder->buildUrl($image, $width, $height, $options);
     }
 
     /**

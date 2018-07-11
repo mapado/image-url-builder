@@ -21,7 +21,9 @@
     "require-dev": {
         "atoum/atoum": "^3.3",
         "atoum/config-extension": "^0.3.0",
-        "mapado/php-cs-fixer-config": "^2.1"
+        "mapado/php-cs-fixer-config": "^2.1",
+        "phpstan/phpstan": "^0.10.1",
+        "twig/twig": "^2.4"
     },
     "suggest": {
         "twig/twig": "For twig integration via the Mapado\\ImageUrlBuilder\\Twig\\UrlBuilderExtension extension"
