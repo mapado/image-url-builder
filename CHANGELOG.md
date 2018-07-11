@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.0
+
+### Added
+
+* Added the `withHttpsPrefix`
+
+### Changed
+
+* Allow url starting with `http://` an `https://` and crop them as well
+
 ## 1.1.0
 
 ### Added

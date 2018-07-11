@@ -22,6 +22,11 @@ class Builder
         return new self('http:');
     }
 
+    public function withHttpsPrefix()
+    {
+        return new self('https:');
+    }
+
     /**
      * generate an image url from its slug
      *
@@ -37,6 +42,10 @@ class Builder
         array $options = []
     ): string {
         $image = $imageSlug;
+        if (0 === strpos($image, 'http://') || 0 === strpos($image, 'https://')) {
+            $image = preg_replace('#^http(s)?://#', '//', $image);
+        }
+
         if (!preg_match('#^//img([1-3])?.mapado.net/#', $image)) {
             $host = $this->getHost($image);
             $image = $host . $image;

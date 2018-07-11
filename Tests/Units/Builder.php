@@ -88,6 +88,21 @@ class Builder extends atoum
             ->isEqualTo($baseUrl . '_thumbs/200-150.iid=200-100;rcr=1.5.png');
     }
 
+    public function testWithHttpPrefix()
+    {
+        $baseUrl = '//img.mapado.net/2014/1/1/my-image.png';
+        $httpUrl = 'http:' . $baseUrl;
+        $httpsUrl = 'https:' . $baseUrl;
+        $expected = $baseUrl . '_thumbs/200-150.png';
+
+        $this
+            ->string($this->manager->buildUrl($httpUrl, 200, 150))
+                ->isEqualTo($expected)
+            ->string($this->manager->buildUrl($httpsUrl, 200, 150))
+                ->isEqualTo($expected)
+        ;
+    }
+
     /**
      * testNoDomain
      *
@@ -118,15 +133,23 @@ class Builder extends atoum
             ->isEqualTo('http://img1.mapado.net/' . $baseUrl);
     }
 
+    public function testBuildHttpsUrl()
+    {
+        $baseUrl = '2014/1/1/my-image.png';
+        $url = $this->manager
+            ->withHttpsPrefix()
+            ->buildUrl($baseUrl);
+
+        $this->string($url)
+            ->isEqualTo('https://img1.mapado.net/' . $baseUrl);
+    }
+
     public function testBuildHttpDoesNotInterferWithInstance()
     {
         $baseUrl = '2014/1/1/my-image.png';
         $this->manager->withHttpPrefix();
 
-        $url = $this->manager
-            ->buildUrl($baseUrl);
-
-        $this->string($url)
+        $this->string($this->manager->buildUrl($baseUrl))
             ->isEqualTo('//img1.mapado.net/' . $baseUrl);
     }
 }

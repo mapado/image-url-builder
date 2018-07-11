@@ -1,4 +1,4 @@
-# image-url-builder
+# image-url-builder [![Build Status](https://travis-ci.org/mapado/image-url-builder.svg?branch=master)](https://travis-ci.org/mapado/image-url-builder)
 Generate a full url from an image slug
 
 ## Installation
@@ -16,18 +16,26 @@ $builder = new Builder();
 
 $width = 800;
 $height = 600;
-$url = $builder->buildUrl('/2018/01/foo.jpg', $width, $height);
+$url = $builder->buildUrl('2018/01/foo.jpg', $width, $height);
 
 // will output '//img.mapado.net/2018/01/foo_thumbs/800-600.jpg'
 ```
 
-### Force http prefix
+The first parameter of the `buildUrl` function accept an image "slug" or a full image url (starting with `https://img.mapado.net/`)
 
-If you want to force http prefix, you can use the `withHttpPrefix()` function before :
+### Force http(s) prefix
+
+If you want to force http prefix, you can use the `withHttpPrefix()` or `withHttpsPrefix()` function before :
 ```php
-$url = $builder
+$httpUrl = $builder
     ->withHttpPrefix()
         ->buildUrl($slug, $width, $height);
+// will output `http://img.mapado.net/xxxx...`
+
+$httpsUrl = $builder
+    ->withHttpsPrefix()
+        ->buildUrl($slug, $width, $height);
+// will output `https://img.mapado.net/xxxx...`
 ```
 
 ### With Twig
