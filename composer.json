@@ -20,5 +20,8 @@
     },
     "require-dev": {
         "atoum/atoum": "^3.3"
+    },
+    "suggest": {
+        "twig/twig": "For twig integration via the Mapado\\ImageUrlBuilder\\Twig\\UrlBuilderExtension extension"
     }
 }

@@ -29,3 +29,12 @@ $url = $builder
     ->withHttpPrefix()
         ->buildUrl($slug, $width, $height);
 ```
+
+### With Twig
+
+A Twig extension is available : `Mapado\ImageUrlBuilder\Twig\UrlBuilderExtension`
+
+You can use the filter like this:
+```twig
+<img src="{{ imageSlug|imageUrl(width, height) }}" />
+```

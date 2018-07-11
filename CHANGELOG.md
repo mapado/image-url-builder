@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.1.0
+
+### Added
+
+* Added twig extension
+
+### Changed for closed-source upgrade
+
+* the extension class is now `Mapado\ImageUrlBuilder\Twig\UrlBuilderExtension`
+* the `crop` twig filter has been renammed to `buildUrl`
+
 ## 1.0.0
 
 ### Changed
