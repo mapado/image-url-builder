@@ -6,11 +6,9 @@ matrix:
     include:
         - php: 7.2
         - php: 7.1
-        - php: 7.0
-          env: DO_UPDATE="1"
 
 install:
-    - if [ $DO_UPDATE ]; then composer update; else composer install; fi
+    - composer install
 
 script:
     - vendor/bin/phpstan analyse
