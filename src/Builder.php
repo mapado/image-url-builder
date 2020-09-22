@@ -19,11 +19,17 @@ class Builder
         $this->prefix = $prefix;
     }
 
+    /**
+     * @return Builder
+     */
     public function withHttpPrefix()
     {
         return new self('http:');
     }
 
+    /**
+     * @return Builder
+     */
     public function withHttpsPrefix()
     {
         return new self('https:');
@@ -36,6 +42,7 @@ class Builder
      * @param int $width the output width
      * @param int $height the output height
      * @param array $options accept cropWidth, cropHeight or url options parameters (like `rcr`, etc.)
+     * @return string
      */
     public function buildUrl(
         string $imageSlug,
@@ -48,12 +55,12 @@ class Builder
             $image = preg_replace('#^http(s)?://#', '//', $image);
         }
 
-        if (!preg_match('#^//img([1-3])?.mapado.net/#', $image)) {
+        if (null !== $image && !preg_match('#^//img([1-3])?.mapado.net/#', $image)) {
             $host = $this->getHost($image);
             $image = $host . $image;
         }
 
-        if ($width > 0) {
+        if (null !== $image && $width > 0) {
             $extension = pathinfo($image, PATHINFO_EXTENSION);
             $extLen = strlen($extension);
             if ($extLen > 4) {
@@ -93,6 +100,9 @@ class Builder
 
     /**
      * getHost
+     *
+     * @param string $image
+     * @return string
      */
     private function getHost(string $image): string
     {
