@@ -56,6 +56,9 @@ class UrlBuilderExtension extends AbstractExtension
         return $this->builder->buildUrl($image, $width, $height, $options);
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return 'mapado_image_url_builder';

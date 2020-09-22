@@ -19,11 +19,17 @@ class Builder
         $this->prefix = $prefix;
     }
 
+    /**
+     * @return Builder
+     */
     public function withHttpPrefix()
     {
         return new self('http:');
     }
 
+    /**
+     * @return Builder
+     */
     public function withHttpsPrefix()
     {
         return new self('https:');
