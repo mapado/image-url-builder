@@ -12,25 +12,19 @@ class Builder
     private $prefix;
 
     /**
-     * @var string prefix of url, prefer using `withHttpPrefix`
+     * @param ?string $prefix prefix of url, prefer using `withHttpPrefix`
      */
-    public function __construct(string $prefix = null)
+    public function __construct(?string $prefix = null)
     {
         $this->prefix = $prefix;
     }
 
-    /**
-     * @return Builder
-     */
-    public function withHttpPrefix()
+    public function withHttpPrefix(): self
     {
         return new self('http:');
     }
 
-    /**
-     * @return Builder
-     */
-    public function withHttpsPrefix()
+    public function withHttpsPrefix(): self
     {
         return new self('https:');
     }
@@ -41,8 +35,7 @@ class Builder
      * @param string $imageSlug the image slug (ie. `/2018/01/foo.jpg`)
      * @param int $width the output width
      * @param int $height the output height
-     * @param array $options accept cropWidth, cropHeight or url options parameters (like `rcr`, etc.)
-     * @return string
+     * @param array<string, mixed> $options accept cropWidth, cropHeight or url options parameters (like `rcr`, etc.)
      */
     public function buildUrl(
         string $imageSlug,
@@ -73,8 +66,8 @@ class Builder
             }
 
             if (!empty($options['cropWidth']) || !empty($options['cropHeight'])) {
-                $cropWidth = !empty($options['cropWidth']) ? $options['cropWidth'] : 0;
-                $cropHeight = !empty($options['cropHeight']) ? $options['cropHeight'] : 0;
+                $cropWidth = $options['cropWidth'] ?? 0;
+                $cropHeight = $options['cropHeight'] ?? 0;
                 $image .= '-' . (int) $cropWidth . '-' . (int) $cropHeight;
 
                 unset($options['cropWidth']);
@@ -98,12 +91,6 @@ class Builder
         return $this->prefix . $image;
     }
 
-    /**
-     * getHost
-     *
-     * @param string $image
-     * @return string
-     */
     private function getHost(string $image): string
     {
         $matches = [];

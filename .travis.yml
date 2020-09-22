@@ -1,17 +1,14 @@
 ---
-sudo: false
-
 language: php
 matrix:
-    include:
-        - php: 7.4
-        - php: 7.3
-        - php: 7.2
-        - php: 7.1
+  include:
+    - php: 7.4
+    - php: 7.3
+    - php: 7.2
 
 install:
-    - composer install
+  - composer install
 
 script:
-    - vendor/bin/phpstan analyse
-    - vendor/bin/atoum
+  - vendor/bin/phpstan analyse -c phpstan.neon
+  - vendor/bin/atoum

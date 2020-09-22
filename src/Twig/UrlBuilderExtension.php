@@ -8,11 +8,6 @@ use Mapado\ImageUrlBuilder\Builder;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
-/**
- * ImageExtension
- *
- * @author Julien Deniau <julien.deniau@mapado.com>
- */
 class UrlBuilderExtension extends AbstractExtension
 {
     /**
@@ -20,20 +15,15 @@ class UrlBuilderExtension extends AbstractExtension
      */
     private $builder;
 
-    /**
-     * @param Builder $builder
-     */
     public function __construct(Builder $builder)
     {
         $this->builder = $builder;
     }
 
     /**
-     * getFilters
-     *
-     * @return array
+     * @return array<TwigFilter>
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('imageUrl', [$this, 'imageUrl']),
@@ -41,13 +31,7 @@ class UrlBuilderExtension extends AbstractExtension
     }
 
     /**
-     * imageUrl
-     *
-     * @param string $image
-     * @param int $width
-     * @param int $height
-     * @param array $options
-     * @return string
+     * @param array<string, mixed> $options
      */
     public function imageUrl(
         string $image,
@@ -56,13 +40,5 @@ class UrlBuilderExtension extends AbstractExtension
         array $options = []
     ): string {
         return $this->builder->buildUrl($image, $width, $height, $options);
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'mapado_image_url_builder';
     }
 }
