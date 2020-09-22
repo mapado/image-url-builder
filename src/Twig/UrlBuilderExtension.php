@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace Mapado\ImageUrlBuilder\Twig;
 
 use Mapado\ImageUrlBuilder\Builder;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
 /**
  * ImageExtension
  *
  * @author Julien Deniau <julien.deniau@mapado.com>
  */
-class UrlBuilderExtension extends \Twig_Extension
+class UrlBuilderExtension extends AbstractExtension
 {
     /**
      * @var Builder
@@ -19,7 +21,7 @@ class UrlBuilderExtension extends \Twig_Extension
     private $builder;
 
     /**
-     * __construct
+     * @param Builder $builder
      */
     public function __construct(Builder $builder)
     {
@@ -34,12 +36,16 @@ class UrlBuilderExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('imageUrl', [$this, 'imageUrl']),
+            new TwigFilter('imageUrl', [$this, 'imageUrl']),
         ];
     }
 
     /**
-     * buildUrl
+     * @param string $image
+     * @param int $width
+     * @param int $height
+     * @param array $options
+     * @return string
      */
     public function imageUrl(
         string $image,
@@ -50,9 +56,6 @@ class UrlBuilderExtension extends \Twig_Extension
         return $this->builder->buildUrl($image, $width, $height, $options);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'mapado_image_url_builder';

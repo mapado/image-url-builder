@@ -48,12 +48,12 @@ class Builder
             $image = preg_replace('#^http(s)?://#', '//', $image);
         }
 
-        if (!preg_match('#^//img([1-3])?.mapado.net/#', $image)) {
+        if (null !== $image && !preg_match('#^//img([1-3])?.mapado.net/#', $image)) {
             $host = $this->getHost($image);
             $image = $host . $image;
         }
 
-        if ($width > 0) {
+        if (null !== $image && $width > 0) {
             $extension = pathinfo($image, PATHINFO_EXTENSION);
             $extLen = strlen($extension);
             if ($extLen > 4) {
