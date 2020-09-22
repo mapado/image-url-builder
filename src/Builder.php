@@ -42,6 +42,7 @@ class Builder
      * @param int $width the output width
      * @param int $height the output height
      * @param array $options accept cropWidth, cropHeight or url options parameters (like `rcr`, etc.)
+     * @return string
      */
     public function buildUrl(
         string $imageSlug,
@@ -99,6 +100,9 @@ class Builder
 
     /**
      * getHost
+     *
+     * @param string $image
+     * @return string
      */
     private function getHost(string $image): string
     {

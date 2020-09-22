@@ -41,6 +41,8 @@ class UrlBuilderExtension extends AbstractExtension
     }
 
     /**
+     * imageUrl
+     *
      * @param string $image
      * @param int $width
      * @param int $height
