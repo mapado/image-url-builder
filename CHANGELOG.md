@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.0
+
+Add support for PHP 8.x
+
 ## 2.0.0
 
 ### Added
