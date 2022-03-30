@@ -42,6 +42,20 @@ $httpsUrl = $builder
 
 A Twig extension is available : `Mapado\ImageUrlBuilder\Twig\UrlBuilderExtension`
 
+You need to inject an instance of `Mapado\ImageUrlBuilder\Builder` to the constructor.
+
+If you are using Symfony, the following configuration do work fine:
+
+```yaml
+services:
+  Mapado\ImageUrlBuilder\Builder: ~
+
+  Mapado\ImageUrlBuilder\Twig\UrlBuilderExtension:
+    tags:
+      - { name: twig.extension }
+
+```
+
 You can use the filter like this:
 ```twig
 <img src="{{ imageSlug|imageUrl(width, height) }}" />
