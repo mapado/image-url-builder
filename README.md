@@ -1,4 +1,5 @@
-# image-url-builder [![Build Status](https://travis-ci.org/mapado/image-url-builder.svg?branch=master)](https://travis-ci.org/mapado/image-url-builder)
+# image-url-builder
+
 Generate a full url from an image slug
 
 ## Installation
