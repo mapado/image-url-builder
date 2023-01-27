@@ -27,6 +27,7 @@ class UrlBuilderExtension extends AbstractExtension
     {
         return [
             new TwigFilter('imageUrl', [$this, 'imageUrl']),
+            new TwigFilter('imageUrlHttp', [$this, 'imageUrlHttp']),
         ];
     }
 
@@ -40,5 +41,17 @@ class UrlBuilderExtension extends AbstractExtension
         array $options = []
     ): string {
         return $this->builder->buildUrl($image, $width, $height, $options);
+    }
+
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function imageUrlHttp(
+        string $image,
+        int $width = 0,
+        int $height = 0,
+        array $options = []
+    ): string {
+        return $this->builder->withHttpPrefix()->buildUrl($image, $width, $height, $options);
     }
 }

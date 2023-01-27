@@ -61,3 +61,8 @@ You can use the filter like this:
 ```twig
 <img src="{{ imageSlug|imageUrl(width, height) }}" />
 ```
+
+And if you need HTTP (not HTTPs), use the filter like this:
+```twig
+<img src="{{ imageSlug|imageUrlHttp(width, height) }}" />
+```
