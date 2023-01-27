@@ -43,7 +43,7 @@ class Builder
         int $height = 0,
         array $options = []
     ): string {
-        $image = $imageSlug;
+        $image = trim($imageSlug);
         if (0 === strpos($image, 'http://') || 0 === strpos($image, 'https://')) {
             $image = preg_replace('#^http(s)?://#', '//', $image);
         }
