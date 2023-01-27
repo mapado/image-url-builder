@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.1
+
+Fix malformed imageSlug parameter in buildUrl
+
 ## 2.1.0
 
 Add support for PHP 8.x
