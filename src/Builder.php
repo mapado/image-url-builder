@@ -35,7 +35,7 @@ class Builder
      * @param string $imageSlug the image slug (ie. `/2018/01/foo.jpg`)
      * @param int $width the output width
      * @param int $height the output height
-     * @param array<string, mixed> $options accept cropWidth, cropHeight or url options parameters (like `rcr`, etc.)
+     * @param array<string, string|int> $options accept cropWidth, cropHeight or url options parameters (like `rcr`, etc.)
      */
     public function buildUrl(
         string $imageSlug,
