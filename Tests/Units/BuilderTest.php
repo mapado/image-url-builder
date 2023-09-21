@@ -4,84 +4,71 @@ declare(strict_types=1);
 
 namespace Mapado\ImageUrlBuilder\Tests\Units;
 
-use atoum;
-use Mapado\ImageUrlBuilder\Builder as BaseBuilder;
+use PHPUnit\Framework\TestCase;
+use Mapado\ImageUrlBuilder\Builder;
 
-class Builder extends atoum
+/**
+ * @covers Builder
+ */
+class BuilderTest extends TestCase
 {
     private $manager;
 
-    public function beforeTestMethod($method)
+    public function setUp(): void
     {
-        $this->manager = new BaseBuilder();
+        $this->manager = new Builder();
     }
 
-    /**
-     * testNonChangingUrl
-     */
-    public function testNonChangingUrl()
+    public function testNonChangingUrl(): void
     {
         $baseUrl = '//img.mapado.net/2014/1/1/my-image.png';
         $url = $this->manager->buildUrl($baseUrl);
-        $this->string($url)
-            ->isEqualTo($baseUrl);
+        $this->assertSame($baseUrl, $url);
 
         $baseUrl = '//img1.mapado.net/2014/1/1/my-image.png';
         $url = $this->manager->buildUrl($baseUrl);
-        $this->string($url)
-            ->isEqualTo($baseUrl);
+        $this->assertSame($baseUrl, $url);
 
         $baseUrl = '//img2.mapado.net/2014/1/1/my-image.png';
         $url = $this->manager->buildUrl($baseUrl);
-        $this->string($url)
-            ->isEqualTo($baseUrl);
+        $this->assertSame($baseUrl, $url);
     }
 
-    /**
-     * testThumbs
-     */
+
     public function testThumbs()
     {
         $baseUrl = '//img.mapado.net/2014/1/1/my-image';
         $url = $this->manager->buildUrl($baseUrl, 200);
-        $this->string($url)
-            ->isEqualTo($baseUrl . '_thumbs/200');
+        $this->assertSame($baseUrl . '_thumbs/200', $url);
 
         $baseUrl = '//img.mapado.net/2014/1/1/my-image.png';
         $url = $this->manager->buildUrl($baseUrl, 200);
-        $this->string($url)
-            ->isEqualTo($baseUrl . '_thumbs/200.png');
+        $this->assertSame($baseUrl . '_thumbs/200.png', $url);
 
         $baseUrl = '//img.mapado.net/2014/1/1/my-image.png';
         $url = $this->manager->buildUrl($baseUrl, 200, 150);
-        $this->string($url)
-            ->isEqualTo($baseUrl . '_thumbs/200-150.png');
+        $this->assertSame($baseUrl . '_thumbs/200-150.png', $url);
 
         $baseUrl = '//img.mapado.net/2014/1/1/my-image.png';
         $url = $this->manager->buildUrl($baseUrl, 200, 150, ['cropWidth' => 500]);
-        $this->string($url)
-            ->isEqualTo($baseUrl . '_thumbs/200-150-500-0.png');
+        $this->assertSame($baseUrl . '_thumbs/200-150-500-0.png', $url);
 
         $baseUrl = '//img.mapado.net/2014/1/1/my-image.png';
         $url = $this->manager->buildUrl($baseUrl, 200, 150, ['cropWidth' => 500, 'cropHeight' => 300]);
-        $this->string($url)
-            ->isEqualTo($baseUrl . '_thumbs/200-150-500-300.png');
+        $this->assertSame($baseUrl . '_thumbs/200-150-500-300.png', $url);
 
         // other options
         $baseUrl = '//img.mapado.net/2014/1/1/my-image.png';
         $url = $this->manager->buildUrl($baseUrl, 200, 150, ['rcr' => 1.5]);
-        $this->string($url)
-            ->isEqualTo($baseUrl . '_thumbs/200-150.rcr=1.5.png');
+        $this->assertSame($baseUrl . '_thumbs/200-150.rcr=1.5.png', $url);
 
         $baseUrl = '//img.mapado.net/2014/1/1/my-image.png';
         $url = $this->manager->buildUrl($baseUrl, 200, 150, ['iid' => '200-100']);
-        $this->string($url)
-            ->isEqualTo($baseUrl . '_thumbs/200-150.iid=200-100.png');
+        $this->assertSame($baseUrl . '_thumbs/200-150.iid=200-100.png', $url);
 
         $baseUrl = '//img.mapado.net/2014/1/1/my-image.png';
         $url = $this->manager->buildUrl($baseUrl, 200, 150, ['rcr' => 1.5, 'iid' => '200-100']);
-        $this->string($url)
-            ->isEqualTo($baseUrl . '_thumbs/200-150.iid=200-100;rcr=1.5.png');
+        $this->assertSame($baseUrl . '_thumbs/200-150.iid=200-100;rcr=1.5.png', $url);
     }
 
     public function testWithHttpPrefix()
@@ -91,28 +78,19 @@ class Builder extends atoum
         $httpsUrl = 'https:' . $baseUrl;
         $expected = $baseUrl . '_thumbs/200-150.png';
 
-        $this
-            ->string($this->manager->buildUrl($httpUrl, 200, 150))
-                ->isEqualTo($expected)
-            ->string($this->manager->buildUrl($httpsUrl, 200, 150))
-                ->isEqualTo($expected)
-        ;
+        $this->assertSame($expected, $this->manager->buildUrl($httpUrl, 200, 150));
+        $this->assertSame($expected, $this->manager->buildUrl($httpsUrl, 200, 150));
     }
 
-    /**
-     * testNoDomain
-     */
     public function testNoDomain()
     {
         $baseUrl = '2014/1/1/my-image.png';
         $url = $this->manager->buildUrl($baseUrl);
-        $this->string($url)
-            ->isEqualTo('//img1.mapado.net/' . $baseUrl);
+        $this->assertSame('//img1.mapado.net/' . $baseUrl, $url);
 
         $baseUrl = '2014/1/2/my-image.png';
         $url = $this->manager->buildUrl($baseUrl);
-        $this->string($url)
-            ->isEqualTo('//img.mapado.net/' . $baseUrl);
+        $this->assertSame('//img.mapado.net/' . $baseUrl, $url);
     }
 
     public function testBuildHttpUrl()
@@ -122,8 +100,7 @@ class Builder extends atoum
             ->withHttpPrefix()
             ->buildUrl($baseUrl);
 
-        $this->string($url)
-            ->isEqualTo('http://img1.mapado.net/' . $baseUrl);
+        $this->assertSame('http://img1.mapado.net/' . $baseUrl, $url);
     }
 
     public function testBuildHttpsUrl()
@@ -133,8 +110,7 @@ class Builder extends atoum
             ->withHttpsPrefix()
             ->buildUrl($baseUrl);
 
-        $this->string($url)
-            ->isEqualTo('https://img1.mapado.net/' . $baseUrl);
+        $this->assertSame('https://img1.mapado.net/' . $baseUrl, $url);
     }
 
     public function testBuildHttpDoesNotInterferWithInstance()
@@ -142,7 +118,6 @@ class Builder extends atoum
         $baseUrl = '2014/1/1/my-image.png';
         $this->manager->withHttpPrefix();
 
-        $this->string($this->manager->buildUrl($baseUrl))
-            ->isEqualTo('//img1.mapado.net/' . $baseUrl);
+        $this->assertSame('//img1.mapado.net/' . $baseUrl, $this->manager->buildUrl($baseUrl));
     }
 }
