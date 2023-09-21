@@ -31,7 +31,7 @@ class UrlBuilderExtension extends AbstractExtension
     }
 
     /**
-     * @param array<string, mixed> $options
+     * @param array<string, string|int> $options
      */
     public function imageUrl(
         string $image,
