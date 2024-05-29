@@ -25,11 +25,11 @@ class BuilderTest extends TestCase
         $url = $this->manager->buildUrl($baseUrl);
         $this->assertSame($baseUrl, $url);
 
-        $baseUrl = '//img1.mapado.net/2014/1/1/my-image.png';
+        $baseUrl = '//img.mapado.net/2014/1/1/my-image.png';
         $url = $this->manager->buildUrl($baseUrl);
         $this->assertSame($baseUrl, $url);
 
-        $baseUrl = '//img2.mapado.net/2014/1/1/my-image.png';
+        $baseUrl = '//img.mapado.net/2014/1/1/my-image.png';
         $url = $this->manager->buildUrl($baseUrl);
         $this->assertSame($baseUrl, $url);
     }
@@ -39,11 +39,15 @@ class BuilderTest extends TestCase
     {
         $baseUrl = '//img.mapado.net/2014/1/1/my-image';
         $url = $this->manager->buildUrl($baseUrl, 200);
-        $this->assertSame($baseUrl . '_thumbs/200', $url);
+        $this->assertSame($baseUrl . '_thumbs/200-0', $url);
+
+        $baseUrl = '//img.mapado.net/2014/1/1/my-image';
+        $url = $this->manager->buildUrl($baseUrl, 0, 200);
+        $this->assertSame($baseUrl . '_thumbs/0-200', $url);
 
         $baseUrl = '//img.mapado.net/2014/1/1/my-image.png';
         $url = $this->manager->buildUrl($baseUrl, 200);
-        $this->assertSame($baseUrl . '_thumbs/200.png', $url);
+        $this->assertSame($baseUrl . '_thumbs/200-0.png', $url);
 
         $baseUrl = '//img.mapado.net/2014/1/1/my-image.png';
         $url = $this->manager->buildUrl($baseUrl, 200, 150);
@@ -86,7 +90,7 @@ class BuilderTest extends TestCase
     {
         $baseUrl = '2014/1/1/my-image.png';
         $url = $this->manager->buildUrl($baseUrl);
-        $this->assertSame('//img1.mapado.net/' . $baseUrl, $url);
+        $this->assertSame('//img.mapado.net/' . $baseUrl, $url);
 
         $baseUrl = '2014/1/2/my-image.png';
         $url = $this->manager->buildUrl($baseUrl);
@@ -100,7 +104,7 @@ class BuilderTest extends TestCase
             ->withHttpPrefix()
             ->buildUrl($baseUrl);
 
-        $this->assertSame('http://img1.mapado.net/' . $baseUrl, $url);
+        $this->assertSame('http://img.mapado.net/' . $baseUrl, $url);
     }
 
     public function testBuildHttpsUrl()
@@ -110,7 +114,7 @@ class BuilderTest extends TestCase
             ->withHttpsPrefix()
             ->buildUrl($baseUrl);
 
-        $this->assertSame('https://img1.mapado.net/' . $baseUrl, $url);
+        $this->assertSame('https://img.mapado.net/' . $baseUrl, $url);
     }
 
     public function testBuildHttpDoesNotInterferWithInstance()
@@ -118,6 +122,6 @@ class BuilderTest extends TestCase
         $baseUrl = '2014/1/1/my-image.png';
         $this->manager->withHttpPrefix();
 
-        $this->assertSame('//img1.mapado.net/' . $baseUrl, $this->manager->buildUrl($baseUrl));
+        $this->assertSame('//img.mapado.net/' . $baseUrl, $this->manager->buildUrl($baseUrl));
     }
 }

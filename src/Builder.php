@@ -49,21 +49,18 @@ class Builder
         }
 
         if (null !== $image && !preg_match('#^//img([1-3])?.mapado.net/#', $image)) {
-            $host = $this->getHost($image);
+            $host = '//img.mapado.net/';
             $image = $host . $image;
         }
 
-        if (null !== $image && $width > 0) {
+        if (null !== $image && (null !== $width || null !== $height)) {
             $extension = pathinfo($image, PATHINFO_EXTENSION);
             $extLen = strlen($extension);
             if ($extLen > 4) {
                 $extension = null;
             }
 
-            $image .= '_thumbs/' . $width;
-            if ($height > 0) {
-                $image .= '-' . $height;
-            }
+            $image .= '_thumbs/' . ($width ?? 0) . '-' . ($height ?? 0);
 
             if (!empty($options['cropWidth']) || !empty($options['cropHeight'])) {
                 $cropWidth = $options['cropWidth'] ?? 0;
@@ -89,20 +86,5 @@ class Builder
         }
 
         return $this->prefix . $image;
-    }
-
-    private function getHost(string $image): string
-    {
-        $matches = [];
-        preg_match('#^[0-9]{4}/[0-9]{1,2}/([0-9]{1,2})#', $image, $matches);
-        if (!empty($matches)) {
-            $shard = (int) $matches[1] % 2;
-            $shard = $shard ?: ''; // remove "0"
-        } else {
-            $shard = '';
-        }
-        $host = '//img' . $shard . '.mapado.net/';
-
-        return $host;
     }
 }
