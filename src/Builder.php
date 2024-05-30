@@ -53,7 +53,7 @@ class Builder
             $image = $host . $image;
         }
 
-        if (null !== $image && (null !== $width || null !== $height)) {
+        if (null !== $image && (null !== $width || null !== $height || !empty($options))) {
             $extension = pathinfo($image, PATHINFO_EXTENSION);
             $extLen = strlen($extension);
             if ($extLen > 4) {
@@ -75,9 +75,13 @@ class Builder
                 $optionValues = [];
                 ksort($options);
                 foreach ($options as $key => $value) {
-                    $optionValues[] = $key . '=' . $value;
+                    if ($key !== 'allowwebp') {
+                        $optionValues[] = $key . '=' . $value;
+                    }
                 }
-                $image .= '.' . implode(';', $optionValues);
+                if (!empty($optionValues)) {
+                    $image .= '.' . implode(';', $optionValues);
+                }
             }
 
             if ($extension) {
