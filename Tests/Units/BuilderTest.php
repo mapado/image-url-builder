@@ -124,4 +124,15 @@ class BuilderTest extends TestCase
 
         $this->assertSame('//img.mapado.net/' . $baseUrl, $this->manager->buildUrl($baseUrl));
     }
+
+    public function testAllowwebp(): void
+    {
+        $baseUrl = '//img.mapado.net/2014/1/1/my-image.png';
+        $url = $this->manager->buildUrl($baseUrl, null, null);
+        $this->assertSame($baseUrl, $url);
+
+        $baseUrl = '//img.mapado.net/2014/1/1/my-image.png';
+        $url = $this->manager->buildUrl($baseUrl, null, null, ['allowwebp' => 1]);
+        $this->assertSame($baseUrl . '_thumbs/0-0.png', $url);
+    }
 }
