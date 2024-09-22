@@ -36,12 +36,14 @@ class Builder
      * @param ?int $width the output width
      * @param ?int $height the output height
      * @param array<string, string|int> $options accept cropWidth, cropHeight or url options parameters (like `rcr`, etc.)
+     * @param ?bool $useFailover if true, will use failover server
      */
     public function buildUrl(
         string $imageSlug,
         ?int $width = null,
         ?int $height = null,
-        array $options = []
+        array $options = [],
+        ?bool $useFailover = false,
     ): string {
         $image = trim($imageSlug);
         if (0 === strpos($image, 'http://') || 0 === strpos($image, 'https://')) {
@@ -51,6 +53,10 @@ class Builder
         if (null !== $image && !preg_match('#^//img([1-3])?.mapado.net/#', $image)) {
             $host = '//img.mapado.net/';
             $image = $host . $image;
+        }
+
+        if (null !== $image && $useFailover && preg_match('#^//img([1-3])?.mapado.net/#', $image)) {
+            $image = preg_replace('#^//img([1-3])?\.mapado\.net/#', '//failover-img.mapado.net/', $image);
         }
 
         if (null !== $image && (null !== $width || null !== $height || !empty($options))) {

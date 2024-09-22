@@ -39,6 +39,7 @@ class UrlBuilderExtension extends AbstractExtension
         int $height = 0,
         array $options = []
     ): string {
-        return $this->builder->buildUrl($image, $width, $height, $options);
+        // By default, for the twig extension, we use the failover server
+        return $this->builder->buildUrl($image, $width, $height, $options, true);
     }
 }
