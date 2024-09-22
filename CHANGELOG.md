@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.0
+
+Add an option to use a failover monitored subdomain to load images (failover-img.mapado.net)
+
 ## 2.2.0
 
 Remove use of img/img1 as we are now multiplexing with http2
